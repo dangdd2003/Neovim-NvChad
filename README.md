@@ -66,3 +66,6 @@ rd -r ~\AppData\Local\nvim-data
     - java-test
     - java-debug-adapter
     - github copilot
+    - pyright
+    - python debugger
+    - cpp debugger

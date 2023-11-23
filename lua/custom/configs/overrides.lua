@@ -40,14 +40,18 @@ M.mason = {
     -- c/cpp stuff
     "clangd",
     "clang-format",
+    "codelldb",
 
     -- jdtls
     "jdtls",
     "java-test",
     "java-debug-adapter",
 
-    -- python lsp
+    -- python
     "pyright",
+    "mypy",
+    "ruff",
+    "debugpy",
   },
 }
 
