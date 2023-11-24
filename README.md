@@ -67,7 +67,7 @@ rd -r ~\AppData\Local\nvim-data
 
 ## Plugins:
 - All plugins are installed by default config.
-- My plugins:
+- My plugins: (hightlight plugins)
     - jdtls (custom config)
     - pyright
     - java-test
@@ -76,5 +76,7 @@ rd -r ~\AppData\Local\nvim-data
     - pyright
     - python debugger
     - cpp debugger
+    - nvim-surround
+    - nvim-dap (debug adapter protocol)
 
-- Install **[ripgrex](https://github.com/BurntSushi/ripgrep#installation)** extension for **telescope** in order to use text finding.
+- Install **[ripgrep](https://github.com/BurntSushi/ripgrep#installation)** extension for **telescope** in order to use text finding.
