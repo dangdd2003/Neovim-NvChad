@@ -25,20 +25,27 @@
 git clone https://github.com/NvChad/NvChad ~/.config/nvim --depth 1 && nvim
 ```
 
-- type "y" to install example config (type "n" if you want to config by yourself, most of my plugins use default example config)
+- type "n" to not install example config (this repo include most of example configs)
 
 - Install plugins (my config)
 
 ```bash
 git clone https://github.com/dangdd2003/Neovim-NvChad.git
 cd Neovim-NvChad
-cp -r * ~/.config/nvim
+cp -r ftplugin/ lua/ ~/.config/nvim
 ```
 
 ### Windows
 ```bash
 git clone https://github.com/NvChad/NvChad $HOME\AppData\Local\nvim --depth 1 && nvim
 ```
+
+### After installing Nvchad
+
+- Exit *neovim* and reopen to update packages.
+
+- run ```:MasonInstallAll``` to install all needed packages used for plugins.
+
 ## Update NvChad
 
 - To update NvChad, run ```:NvChadUpdate``` in Neovim.
@@ -59,7 +66,7 @@ rd -r ~\AppData\Local\nvim-data
 ```
 
 ## Plugins:
-- All plugins are installed by default config of NvChad excample
+- All plugins are installed by default config.
 - My plugins:
     - jdtls (custom config)
     - pyright
@@ -69,3 +76,5 @@ rd -r ~\AppData\Local\nvim-data
     - pyright
     - python debugger
     - cpp debugger
+
+- Install **[ripgrex](https://github.com/BurntSushi/ripgrep#installation)** extension for **telescope** in order to use text finding.

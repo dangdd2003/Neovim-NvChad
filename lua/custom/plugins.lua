@@ -121,9 +121,19 @@ local plugins = {
       end
     end,
   },
-  --   "NvChad/nvim-colorizer.lua",
-  --   enabled = false
-  -- },
+
+  {
+    "NvChad/nvim-colorizer.lua",
+    enabled = true,
+  },
+
+  {
+    "kylechui/nvim-surround",
+    version = "*",
+    event = "VeryLazy",
+    opts = {},
+  },
+
 
   -- All NvChad plugins are lazy-loaded by default
   -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`

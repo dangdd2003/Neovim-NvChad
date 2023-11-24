@@ -30,27 +30,27 @@ local function capabilities()
 	return capabilities
 end
 
--- local function directory_exists(path)
--- 	local f = io.popen("cd " .. path)
--- 	local ff = f:read("*all")
+local function directory_exists(path)
+	local f = io.popen("cd " .. path)
+	local ff = f:read("*all")
 
--- 	if ff:find("ItemNotFoundException") then
--- 		return false
--- 	else
--- 		return true
--- 	end
--- end
+	if ff:find("ItemNotFoundException") then
+		return false
+	else
+		return true
+	end
+end
 
 local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
 local root_dir = require("jdtls.setup").find_root(root_markers)
 
 -- calculate workspace dir
 local project_name = vim.fn.fnamemodify(vim.fn.getcwd(), ":p:h:t")
-local workspace_dir = vim.fn.stdpath("data") .. "/workspace-root/" .. project_name
--- if directory_exists(workspace_dir) then
--- else
--- 	os.execute("mkdir " .. workspace_dir)
--- end
+local workspace_dir = vim.fn.stdpath("data") .. "/site/java/workspace-root/" .. project_name
+if directory_exists(workspace_dir) then
+else
+	os.execute("mkdir " .. workspace_dir)
+end
 -- get the mason install path
 local install_path = require("mason-registry").get_package("jdtls"):get_install_path()
 
@@ -105,10 +105,6 @@ local config = {
 
 	init_options = {
 		bundles = {
-      vim.fn.glob(
-        mason_path .. "packages/java-test/extension/server/*.jar",
-        "\n"
-      ),
 			vim.fn.glob(
 				mason_path .. "packages/java-debug-adapter/extension/server/com.microsoft.java.debug.plugin-*.jar",
 				"\n"
@@ -121,7 +117,7 @@ config["on_attach"] = function(client, bufnr)
 	local _, _ = pcall(vim.lsp.codelens.refresh)
 	require("jdtls.dap").setup_dap_main_class_configs()
 	jdtls.setup_dap({ hotcodereplace = "auto" })
-	require("user.lsp.handlers").on_attach(client, bufnr)
+	require("custom.handlers").on_attach(client, bufnr)
 end
 
 vim.api.nvim_create_autocmd({ "BufWritePost" }, {
@@ -132,3 +128,7 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
 })
 
 jdtls.start_or_attach(config)
+
+vim.cmd(
+	[[command! -buffer -nargs=? -complete=custom,v:lua.require'jdtls'._complete_set_runtime JdtSetRuntime lua require('jdtls').set_runtime(<f-args>)]]
+)
