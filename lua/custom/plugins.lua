@@ -26,7 +26,7 @@ local plugins = {
     "jose-elias-alvarez/null-ls.nvim",
     event = "VeryLazy",
     opts = function()
-      return require("custom.configs.null-ls")
+      return require "custom.configs.null-ls"
     end,
   },
 
@@ -63,7 +63,7 @@ local plugins = {
   {
     "mfussenegger/nvim-dap",
     config = function(_, _)
-      require("core.utils").load_mappings("dap")
+      require("core.utils").load_mappings "dap"
     end,
   },
 
@@ -75,7 +75,7 @@ local plugins = {
       "mfussenegger/nvim-dap",
     },
     opts = {
-      handlers = {}
+      handlers = {},
     },
   },
 
@@ -89,19 +89,21 @@ local plugins = {
     config = function(_, _)
       local path = vim.fn.glob(vim.fn.stdpath "data" .. "/mason/") .. "/packages/debugpy/venv/bin/python"
       require("dap-python").setup(path)
-      require("core.utils").load_mappings("dap_python")
+      require("core.utils").load_mappings "dap_python"
     end,
   },
+
   {
     "github/copilot.vim",
-    lazy = false,
-    enabled = false,
+    -- enabled = false,
+    event = "VeryLazy",
     config = function()
       vim.g.copilot_no_tab_map = true
       vim.g.copilot_assume_mapped = true
       vim.g.copilot_no_tab_map = ""
     end,
   },
+
   {
     "rcarriga/nvim-dap-ui",
     dependencies = "mfussenegger/nvim-dap",
@@ -134,7 +136,28 @@ local plugins = {
     opts = {},
   },
 
+  {
+    "iamcco/markdown-preview.nvim",
+    cmd = { "MarkdownPreviewToggle", "MarkdownPreview", "MarkdownPreviewStop" },
+    ft = { "markdown" },
+    build = function()
+      vim.fn["mkdp#util#install"]()
+    end,
+  },
 
+  {
+    "nvimdev/dashboard-nvim",
+    event = "VimEnter",
+    config = function()
+      require "custom.dashboard"
+    end,
+    dependencies = { { "nvim-tree/nvim-web-devicons" } },
+  },
+
+  {
+    "preservim/tagbar",
+    event = "VeryLazy",
+  },
   -- All NvChad plugins are lazy-loaded by default
   -- For a plugin to be loaded, you will need to set either `ft`, `cmd`, `keys`, `event`, or set `lazy = false`
   -- If you want a plugin to load on startup, add `lazy = false` to a plugin spec, for example {
